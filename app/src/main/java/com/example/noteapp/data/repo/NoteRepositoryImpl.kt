@@ -15,7 +15,6 @@ import javax.inject.Inject
 
 class NoteRepositoryImpl @Inject constructor(private val noteDao: NoteDao) : NoteRepository {
 
-
     override fun createNote(note: Note): Flow<ResultStatus<Unit>> = flow {
         emit(ResultStatus.Loading())
         try {
@@ -39,11 +38,22 @@ class NoteRepositoryImpl @Inject constructor(private val noteDao: NoteDao) : Not
 
 
     override fun deleteNote(note: Note): Flow<ResultStatus<Unit>> = flow {
-        emit(ResultStatus.Error(message = String()))
-        noteDao.deleteNote(note.toNoteEntity())
-    }
+        emit(ResultStatus.Loading())
+        try {
+            val data = noteDao.deleteNote(note.toNoteEntity())
+            emit(ResultStatus.Success(data))
+        } catch (e: IOException) {
+            emit(ResultStatus.Error(e.message))
+        }
+    }.flowOn(Dispatchers.IO)
 
-    override fun getAllNotes(): List<Note> {
-        return noteDao.getAllNotes().map { it.toNote() }
-    }
+    override fun getAllNotes():  Flow<ResultStatus<List<Note>>> = flow {
+        emit(ResultStatus.Loading())
+        try {
+            val data = noteDao.getAllNotes().map { it.toNote() }
+            emit(ResultStatus.Success(data))
+        } catch (e: IOException) {
+            emit(ResultStatus.Error(e.message))
+        }
+    }.flowOn(Dispatchers.IO)
 }

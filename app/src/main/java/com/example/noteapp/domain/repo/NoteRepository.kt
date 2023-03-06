@@ -8,7 +8,7 @@ interface NoteRepository {
 
     fun createNote(note: Note):Flow<ResultStatus<Unit>>
 
-    fun getAllNotes():List<Note>
+    fun getAllNotes():Flow<ResultStatus<List<Note>>>
 
     fun editNote(note: Note):Flow<ResultStatus<Unit>>
 

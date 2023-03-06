@@ -22,6 +22,6 @@ object DataModule {
     ).build()
 
     @Provides
-    fun noteDao(appDataBase: AppDataBase):NoteDao = appDataBase.noteDao()
+    fun noteDao(appDataBase: AppDataBase):NoteDao    = appDataBase.noteDao()
 
 }

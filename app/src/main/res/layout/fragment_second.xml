@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.fragment.second.SecondFragment">
+
+    <EditText
+        android:layout_margin="10sp"
+        android:id="@+id/me_second"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/me"
+        android:background="@drawable/editext"
+        android:padding="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <EditText
+        android:layout_margin="10sp"
+        android:id="@+id/you_second"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/you"
+        android:background="@drawable/editext"
+        android:padding="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/me_second"/>
+
+    <Button
+        android:id="@+id/btn_second"
+        android:textSize="16sp"
+        android:text="@string/fab"
+        android:textStyle="italic"
+        android:layout_margin="12sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/editext"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
