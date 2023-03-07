@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NotesViewModel @Inject constructor(
-    private val getAllNotesUseCase: GetAllNotesUseCase
+    private val getAllNotesUseCase: GetAllNotesUseCase,
 ) : ViewModel() {
 
     private val _Notestate = MutableStateFlow<UiState<List<Note>?>>(UiState.Loading())
@@ -36,7 +36,7 @@ class NotesViewModel @Inject constructor(
                         _Notestate.value = UiState.Loading()
                     }
                     is ResultStatus.Error -> {
-                            _Notestate.value = UiState.Error(msg = "error")
+                        _Notestate.value = UiState.Error(msg = "error")
                     }
                 }
             }

@@ -20,8 +20,6 @@ object DataModule {
         AppDataBase::class.java,
         "Note-db"
     ).build()
-
     @Provides
-    fun noteDao(appDataBase: AppDataBase):NoteDao    = appDataBase.noteDao()
-
+    fun noteDao(appDataBase: AppDataBase):NoteDao = appDataBase.noteDao()
 }
