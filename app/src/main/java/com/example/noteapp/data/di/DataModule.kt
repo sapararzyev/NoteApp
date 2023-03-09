@@ -4,11 +4,14 @@ import android.content.Context
 import androidx.room.Room
 import com.example.noteapp.data.local.AppDataBase
 import com.example.noteapp.data.local.NoteDao
+import com.example.noteapp.data.repo.NoteRepositoryImpl
+import com.example.noteapp.domain.repo.NoteRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 
 @Module
@@ -22,4 +25,5 @@ object DataModule {
     ).build()
     @Provides
     fun noteDao(appDataBase: AppDataBase):NoteDao = appDataBase.noteDao()
+
 }

@@ -9,22 +9,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.noteapp.databinding.NotesItemBinding
 import com.example.noteapp.domain.model.Note
 
-class NotesAdapter : ListAdapter<NotesViewModel, NotesAdapter.NotesViewHolder>(NotesCallback()) {
-
-    private var list: ArrayList<Note> = arrayListOf()
-
-    fun addNote(list: ArrayList<Note>) {
-        this.list = list
-        notifyDataSetChanged()
-    }
+class NotesAdapter(
+    private val listener: (model: Note) -> Unit,
+) : ListAdapter<Note, NotesAdapter.NotesViewHolder>(NotesCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
-        val binding = NotesItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = NotesItemBinding.inflate(LayoutInflater.from(parent.context),
+            parent, false)
         return NotesViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
-        holder.bind(list[position])
+        val model = getItem(position)
+        holder.bind(model)
+        holder.itemView.setOnLongClickListener {
+            listener(model)
+            true
+        }
     }
 
     class NotesViewHolder(private val binding: NotesItemBinding) :
@@ -35,12 +36,11 @@ class NotesAdapter : ListAdapter<NotesViewModel, NotesAdapter.NotesViewHolder>(N
         }
     }
 
-    class NotesCallback : DiffUtil.ItemCallback<NotesViewModel>() {
-        override fun areItemsTheSame(oldItem: NotesViewModel, newItem: NotesViewModel) =
+    class NotesCallback : DiffUtil.ItemCallback<Note>() {
+        override fun areItemsTheSame(oldItem: Note, newItem: Note) =
             oldItem == newItem
 
-        @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: NotesViewModel, newItem: NotesViewModel) =
+        override fun areContentsTheSame(oldItem: Note, newItem: Note) =
             oldItem == newItem
     }
 }

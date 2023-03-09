@@ -1,21 +1,31 @@
 package com.example.noteapp.presentation.fragment.second
 
+import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.example.noteapp.base.BaseFragment
+import androidx.navigation.fragment.findNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.noteapp.R
 import com.example.noteapp.databinding.FragmentSecondBinding
 import com.example.noteapp.domain.model.Note
+import com.example.noteapp.presentation.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-class SecondFragment : BaseFragment<FragmentSecondBinding>(FragmentSecondBinding::inflate) {
+@AndroidEntryPoint
+class SecondFragment :
+    BaseFragment<SecondViewModel, FragmentSecondBinding>(R.layout.fragment_second) {
 
-    private val viewModel: SecondViewModel by viewModels()
+    override val binding: FragmentSecondBinding by viewBinding(FragmentSecondBinding::bind)
+    override val vm: SecondViewModel by viewModels()
 
-    override fun setubIU() {
+    override fun setupRequests() {
         binding.btnSecond.setOnClickListener {
             val title = binding.meSecond.text.toString()
             val description = binding.youSecond.text.toString()
-            viewModel.createUseCase(Note(title = title,
-                description = description, id = 0, createAt = 0))
+            vm.createUseCase(Note(title = title,
+                description = description,
+                createAt = 12))
+            findNavController().navigateUp()
+            findNavController().navigate(R.id.notesFragment)
         }
     }
-
 }

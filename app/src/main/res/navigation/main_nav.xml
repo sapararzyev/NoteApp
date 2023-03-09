@@ -10,6 +10,7 @@
         android:name="com.example.noteapp.presentation.fragment.notes.NotesFragment"
         android:label="fragment_notes"
         tools:layout="@layout/fragment_notes" />
+
     <fragment
         android:id="@+id/secondFragment"
         android:name="com.example.noteapp.presentation.fragment.second.SecondFragment"
