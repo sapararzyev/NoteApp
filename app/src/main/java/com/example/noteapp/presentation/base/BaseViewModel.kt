@@ -20,6 +20,8 @@ abstract class BaseViewModel : ViewModel() {
                     is ResultStatus.Success -> if (it.data != null) state.value = UiState.Success(it.data)
                 }
             }
+
         }
     }
+
 }

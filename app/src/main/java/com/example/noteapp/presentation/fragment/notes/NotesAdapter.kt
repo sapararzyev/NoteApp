@@ -1,6 +1,5 @@
 package com.example.noteapp.presentation.fragment.notes
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +9,7 @@ import com.example.noteapp.databinding.NotesItemBinding
 import com.example.noteapp.domain.model.Note
 
 class NotesAdapter(
-    private val listener: (model: Note) -> Unit,
+    private val listener: (model: Note) -> Unit
 ) : ListAdapter<Note, NotesAdapter.NotesViewHolder>(NotesCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
@@ -26,14 +25,16 @@ class NotesAdapter(
             listener(model)
             true
         }
-    }
 
-    class NotesViewHolder(private val binding: NotesItemBinding) :
+    }
+  inner  class NotesViewHolder(private val binding: NotesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(notesModel: Note) {
-            binding.itemTvTiyle.text = notesModel.title
-            binding.itemTvDes.text = notesModel.description
-        }
+            with(binding){
+            itemTvTiyle.text = notesModel.title
+            itemTvDes.text = notesModel.description
+
+        }}
     }
 
     class NotesCallback : DiffUtil.ItemCallback<Note>() {

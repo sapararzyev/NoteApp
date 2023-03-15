@@ -9,4 +9,7 @@
     <string name="notes">notes</string>
     <string name="second">second</string>
     <string name="discription">Discription</string>
+    <string name="create">Note successfully create</string>
+    <string name="delete">Note successfully delete</string>
+    <string name="edit">Note successfully edit</string>
 </resources>

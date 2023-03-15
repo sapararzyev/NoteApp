@@ -15,10 +15,12 @@ import com.example.noteapp.presentation.fragment.notes.UiState
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-abstract class BaseFragment<VM : BaseViewModel, VB : ViewBinding>(@LayoutRes layoutId: Int) : Fragment(layoutId) {
+abstract class BaseFragment<VM : BaseViewModel, VB : ViewBinding>(@LayoutRes layoutId: Int)
+    : Fragment(layoutId) {
 
     protected abstract val  binding: VB
     protected abstract val vm: VM
+
 
     private var _controller: NavController? = null
     protected val controller get() = _controller!!

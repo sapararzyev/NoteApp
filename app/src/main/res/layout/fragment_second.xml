@@ -45,4 +45,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/editext"/>
 
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/me_second"
+        android:id="@+id/notes_bar"
+        app:trackColor="@color/teal_200"
+        app:indicatorColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:progress="25"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
