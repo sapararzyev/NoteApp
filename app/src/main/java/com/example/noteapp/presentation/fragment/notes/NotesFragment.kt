@@ -47,14 +47,13 @@ class NotesFragment : BaseFragment<NotesViewModel, FragmentNotesBinding>(R.layou
 
     override fun listeners() {
         binding.btnAddNote.setOnClickListener {
-            val bundle = bundleOf(ARG_ADD_EDIT to note)
-            controller.navigateUp()
-            controller.navigate(R.id.action_notesFragment_to_addFragment3, bundle)
+            controller.navigate(R.id.action_notesFragment_to_addFragment3)
         }
     }
 
     private fun onItemClikListener(model: Note){
-        controller.navigate(R.id.action_notesFragment_to_addFragment3)
+        val bundle = bundleOf(ARG_ADD_EDIT to note)
+        controller.navigate(R.id.action_notesFragment_to_addFragment3,bundle)
     }
 
     private fun onLongItemClikListener(model: Note) {

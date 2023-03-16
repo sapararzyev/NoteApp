@@ -25,8 +25,8 @@ class AddFragment:
         if (arguments != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 note = requireArguments().getSerializable(NotesFragment.ARG_ADD_EDIT, Note::class.java)
+                setData()
             }
-            setData()
         }
     }
 
