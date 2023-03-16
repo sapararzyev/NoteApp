@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class EditionViewModel @Inject constructor(
+class AddViewModel @Inject constructor(
     private val createNoteUseCase: CreateNoteUseCase,
     private val updateNoteUseCase: UpdateNoteUseCase,
 ) : BaseViewModel() {

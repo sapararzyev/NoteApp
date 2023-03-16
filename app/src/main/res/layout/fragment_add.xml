@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/img"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.fragment.addition.EdditFragment">
+    tools:context=".presentation.fragment.addition.AddFragment">
 
     <EditText
         android:layout_margin="10sp"

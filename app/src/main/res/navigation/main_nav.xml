@@ -11,13 +11,14 @@
         android:label="fragment_notes"
         tools:layout="@layout/fragment_notes" >
         <action
-            android:id="@+id/action_notesFragment_to_secondFragment"
-            app:destination="@id/secondFragment" />
+            android:id="@+id/action_notesFragment_to_addFragment3"
+            app:destination="@id/addFragment3" />
     </fragment>
-
     <fragment
-        android:id="@+id/secondFragment"
-        android:name="com.example.noteapp.presentation.fragment.addition.EdditFragment"
-        android:label="fragment_second"
-        tools:layout="@layout/fragment_second" />
+        android:id="@+id/addFragment3"
+        android:name="com.example.noteapp.presentation.fragment.addition.AddFragment"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_add" />
+
+
 </navigation>

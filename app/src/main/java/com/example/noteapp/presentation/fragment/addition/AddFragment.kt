@@ -6,7 +6,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.noteapp.R
-import com.example.noteapp.databinding.FragmentSecondBinding
+import com.example.noteapp.databinding.FragmentAddBinding
 import com.example.noteapp.domain.model.Note
 import com.example.noteapp.presentation.base.BaseFragment
 import com.example.noteapp.presentation.exseption.ShowTost
@@ -14,17 +14,18 @@ import com.example.noteapp.presentation.fragment.notes.NotesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class EditionFragment:
-    BaseFragment<EditionViewModel, FragmentSecondBinding>(R.layout.fragment_second) {
+class AddFragment:
+    BaseFragment<AddViewModel, FragmentAddBinding>(R.layout.fragment_add) {
 
-    override val binding: FragmentSecondBinding by viewBinding(FragmentSecondBinding::bind)
-    override val vm: EditionViewModel by viewModels()
+    override val binding: FragmentAddBinding by viewBinding(FragmentAddBinding::bind)
+    override val vm: AddViewModel by viewModels()
     private var note: Note? = null
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun initialize() {
         if (arguments != null) {
-            note = requireArguments().getSerializable(NotesFragment.ARG_ADD_EDIT, Note::class.java)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                note = requireArguments().getSerializable(NotesFragment.ARG_ADD_EDIT, Note::class.java)
+            }
             setData()
         }
     }

@@ -16,7 +16,7 @@ class NotesFragment : BaseFragment<NotesViewModel, FragmentNotesBinding>(R.layou
 
     override val binding: FragmentNotesBinding by viewBinding(FragmentNotesBinding::bind)
     override val vm: NotesViewModel by viewModels()
-    private val adapter: NotesAdapter by lazy { NotesAdapter(this::listener) }
+    private val adapter: NotesAdapter by lazy { NotesAdapter(this::onLongItemClikListener,this::onItemClikListener) }
     private var note: Note? = null
 
     override fun initialize() {
@@ -49,15 +49,16 @@ class NotesFragment : BaseFragment<NotesViewModel, FragmentNotesBinding>(R.layou
         binding.btnAddNote.setOnClickListener {
             val bundle = bundleOf(ARG_ADD_EDIT to note)
             controller.navigateUp()
-            controller.navigate(R.id.action_notesFragment_to_secondFragment, bundle)
+            controller.navigate(R.id.action_notesFragment_to_addFragment3, bundle)
         }
     }
 
-    private fun listener(model: Note) {
+    private fun onItemClikListener(model: Note){
+        controller.navigate(R.id.action_notesFragment_to_addFragment3)
+    }
+
+    private fun onLongItemClikListener(model: Note) {
         vm.deleteNotes(model)
-        adapter.notifyItemRemoved(model.id)
-        controller.navigateUp()
-        controller.navigate(R.id.notesFragment)
     }
 
     companion object {
