@@ -47,9 +47,7 @@ class NotesFragment : BaseFragment<NotesViewModel, FragmentNotesBinding>(R.layou
 
     override fun listeners() {
         binding.btnAddNote.setOnClickListener {
-            val bundle = bundleOf().apply {
-                putSerializable(ARG_ADD_EDIT,note)
-            }
+            val bundle = bundleOf(ARG_ADD_EDIT to note)
             controller.navigateUp()
             controller.navigate(R.id.action_notesFragment_to_secondFragment, bundle)
         }

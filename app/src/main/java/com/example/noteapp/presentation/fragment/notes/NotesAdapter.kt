@@ -27,7 +27,8 @@ class NotesAdapter(
         }
 
     }
-  inner  class NotesViewHolder(private val binding: NotesItemBinding) :
+
+    inner  class NotesViewHolder(private val binding: NotesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(notesModel: Note) {
             with(binding){

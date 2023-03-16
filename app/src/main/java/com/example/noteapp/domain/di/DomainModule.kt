@@ -1,10 +1,7 @@
 package com.example.noteapp.domain.di
 
 import com.example.noteapp.domain.repo.NoteRepository
-import com.example.noteapp.domain.usecase.CreateNoteUseCase
-import com.example.noteapp.domain.usecase.DeleteNoteUseCase
-import com.example.noteapp.domain.usecase.EditNoteUseCase
-import com.example.noteapp.domain.usecase.GetAllNotesUseCase
+import com.example.noteapp.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,8 +26,8 @@ object DomainModule {
 
     @Provides
     @Singleton
-    fun provideEditNoteUseCase(repo: NoteRepository): EditNoteUseCase {
-        return EditNoteUseCase(repo)
+    fun provideEditNoteUseCase(repo: NoteRepository): UpdateNoteUseCase {
+        return UpdateNoteUseCase(repo)
     }
 
     @Provides

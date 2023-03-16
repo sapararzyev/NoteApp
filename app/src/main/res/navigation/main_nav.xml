@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/secondFragment"
-        android:name="com.example.noteapp.presentation.fragment.second.SecondFragment"
+        android:name="com.example.noteapp.presentation.fragment.addition.EdditFragment"
         android:label="fragment_second"
         tools:layout="@layout/fragment_second" />
 </navigation>

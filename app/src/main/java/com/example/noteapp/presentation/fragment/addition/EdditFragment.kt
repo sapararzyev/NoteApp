@@ -1,4 +1,4 @@
-package com.example.noteapp.presentation.fragment.second
+package com.example.noteapp.presentation.fragment.addition
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -14,11 +14,11 @@ import com.example.noteapp.presentation.fragment.notes.NotesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SecondFragment :
-    BaseFragment<SecondViewModel, FragmentSecondBinding>(R.layout.fragment_second) {
+class EditionFragment:
+    BaseFragment<EditionViewModel, FragmentSecondBinding>(R.layout.fragment_second) {
 
     override val binding: FragmentSecondBinding by viewBinding(FragmentSecondBinding::bind)
-    override val vm: SecondViewModel by viewModels()
+    override val vm: EditionViewModel by viewModels()
     private var note: Note? = null
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -40,7 +40,7 @@ class SecondFragment :
         with(binding) {
             btnSecond.setOnClickListener {
                 if (note != null)
-                    vm.editNote(
+                    vm.updateNote(
                         note!!.copy(
                             title = meSecond.text.toString(),
                             description =  youSecond.text.toString()
@@ -70,7 +70,7 @@ class SecondFragment :
                 controller.navigateUp()
             }
         )
-        vm.editNoteState.collectState(
+        vm.updateNoteState.collectState(
             onLoading = {
                 binding.notesBar.isVisible = true
             },
@@ -86,6 +86,5 @@ class SecondFragment :
                 controller.navigateUp()
             }
         )
-
     }
 }

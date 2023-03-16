@@ -1,8 +1,8 @@
-package com.example.noteapp.presentation.fragment.second
+package com.example.noteapp.presentation.fragment.addition
 
 import com.example.noteapp.domain.model.Note
 import com.example.noteapp.domain.usecase.CreateNoteUseCase
-import com.example.noteapp.domain.usecase.EditNoteUseCase
+import com.example.noteapp.domain.usecase.UpdateNoteUseCase
 import com.example.noteapp.presentation.base.BaseViewModel
 import com.example.noteapp.presentation.fragment.notes.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,16 +12,16 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class SecondViewModel @Inject constructor(
+class EditionViewModel @Inject constructor(
     private val createNoteUseCase: CreateNoteUseCase,
-    private val editNoteUseCase: EditNoteUseCase,
+    private val updateNoteUseCase: UpdateNoteUseCase,
 ) : BaseViewModel() {
 
     private val _createNoteState = MutableStateFlow<UiState<Unit>>(UiState.Empty())
     val createNoteState = _createNoteState.asStateFlow()
 
-    private val _editNoteUseCase = MutableStateFlow<UiState<Unit>>(UiState.Empty())
-    val editNoteState = _editNoteUseCase.asStateFlow()
+    private val _updateNoteUseCase = MutableStateFlow<UiState<Unit>>(UiState.Empty())
+    val updateNoteState = _updateNoteUseCase.asStateFlow()
 
     fun create(title: String, dest: String) {
         if (title.isNotEmpty() && title.isNotBlank()) {
@@ -35,9 +35,9 @@ class SecondViewModel @Inject constructor(
         }
     }
 
-    fun editNote(note: Note) {
+    fun updateNote(note: Note) {
         if (note.title.isNotEmpty() && note.title.isNotBlank()) {
-            editNoteUseCase(
+            updateNoteUseCase(
                 note
             ).collectFlow(_createNoteState)
         } else {
