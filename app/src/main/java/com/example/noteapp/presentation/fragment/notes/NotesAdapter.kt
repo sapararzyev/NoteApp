@@ -13,13 +13,6 @@ class NotesAdapter(
     private val onItemClikListener: (Note) -> Unit,
 ) : ListAdapter<Note, NotesAdapter.NotesViewHolder>(NotesCallback()) {
 
-//    private var list = listOf<Note>()
-//
-//    fun updateList(list: List<Note>) {
-//        this.list = list
-//        notifyDataSetChanged()
-//    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
         val binding = NotesItemBinding.inflate(LayoutInflater.from(parent.context),
             parent, false)

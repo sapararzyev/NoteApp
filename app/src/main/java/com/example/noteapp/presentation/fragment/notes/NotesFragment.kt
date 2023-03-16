@@ -58,6 +58,7 @@ class NotesFragment : BaseFragment<NotesViewModel, FragmentNotesBinding>(R.layou
 
     private fun onLongItemClikListener(model: Note) {
         vm.deleteNotes(model)
+        adapter.notifyItemRemoved(model.id)
     }
 
     companion object {
