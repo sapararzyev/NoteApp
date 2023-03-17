@@ -1,10 +1,8 @@
 package com.example.noteapp.presentation.fragment.addition
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import by.kirich1409.viewbindingdelegate.viewBinding
+import androidx.navigation.ui.navigateUp
 import com.example.noteapp.R
 import com.example.noteapp.databinding.FragmentAddBinding
 import com.example.noteapp.domain.model.Note
@@ -13,79 +11,73 @@ import com.example.noteapp.presentation.exseption.ShowTost
 import com.example.noteapp.presentation.fragment.notes.NotesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
+@Suppress("DEPRECATION")
 @AndroidEntryPoint
-class AddFragment:
-    BaseFragment<AddViewModel, FragmentAddBinding>(R.layout.fragment_add) {
+class AddFragment :
+    BaseFragment<AddViewModel, FragmentAddBinding>(FragmentAddBinding::inflate) {
 
-    override val binding: FragmentAddBinding by viewBinding(FragmentAddBinding::bind)
     override val vm: AddViewModel by viewModels()
-    private var note: Note? = null
+    private val note by lazy { arguments?.getSerializable(NotesFragment.ARG_ADD_EDIT) as Note? }
 
     override fun initialize() {
         if (arguments != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                note = requireArguments().getSerializable(NotesFragment.ARG_ADD_EDIT, Note::class.java)
-                setData()
-            }
-        }
-    }
-
-    private fun setData() {
-        with(binding){
-            meSecond.setText(note!!.title)
-            youSecond.setText(note!!.description)
+            binding.meSecond.setText(note!!.title)
+            binding.youSecond.setText(note!!.description)
         }
     }
 
     override fun listeners() {
         with(binding) {
             btnSecond.setOnClickListener {
-                if (note != null)
+                if (arguments != null) {
                     vm.updateNote(
-                        note!!.copy(
-                            title = meSecond.text.toString(),
-                            description =  youSecond.text.toString()
-                        )
+                        id = note?.id!!,
+                        meSecond.text.toString(),
+                        youSecond.text.toString()
+
                     )
-               else vm.create(
-                    meSecond.text.toString(), youSecond.text.toString()
+                } else vm.create(
+                    meSecond.text.toString(),
+                    youSecond.text.toString()
                 )
             }
         }
     }
 
+
     override fun setupRequests() {
-        vm.createNoteState.collectState(
-            onLoading = {
-                binding.notesBar.isVisible = true
-            },
-            onSuccess = {
-                ShowTost(getString(R.string.create))
-                binding.notesBar.isVisible = false
-                controller.navigateUp()
-                controller.navigate(R.id.notesFragment)
-            },
-            onError = {
-                binding.notesBar.isVisible = false
-                ShowTost(it)
-                controller.navigateUp()
-            }
-        )
+
         vm.updateNoteState.collectState(
             onLoading = {
                 binding.notesBar.isVisible = true
             },
             onSuccess = {
                 ShowTost(getString(R.string.edit))
-                binding.notesBar.isVisible = false
                 controller.navigateUp()
                 controller.navigate(R.id.notesFragment)
+                binding.notesBar.isVisible = false
             },
             onError = {
                 binding.notesBar.isVisible = false
                 ShowTost(it)
-                controller.navigateUp()
             }
         )
+
+        vm.createNoteState.collectState(
+            onLoading = {
+                binding.notesBar.isVisible = true
+            },
+            onSuccess = {
+                ShowTost(getString(R.string.create))
+                controller.navigateUp()
+                controller.navigate(R.id.notesFragment)
+                binding.notesBar.isVisible = false
+            },
+            onError = {
+                binding.notesBar.isVisible = false
+                ShowTost(it)
+            }
+        )
+
     }
 }

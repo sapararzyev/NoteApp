@@ -1,8 +1,9 @@
 package com.example.noteapp.presentation.base
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.annotation.LayoutRes
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,15 +16,29 @@ import com.example.noteapp.presentation.fragment.notes.UiState
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-abstract class BaseFragment<VM : BaseViewModel, VB : ViewBinding>(@LayoutRes layoutId: Int)
-    : Fragment(layoutId) {
+typealias  Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 
-    protected abstract val  binding: VB
+abstract class BaseFragment<VM : BaseViewModel, VB : ViewBinding>(private val inflate: Inflate<VB>) :
+    Fragment() {
+
+    private var _binding: VB? = null
+    protected val binding get() = _binding!!
+
     protected abstract val vm: VM
 
 
     private var _controller: NavController? = null
     protected val controller get() = _controller!!
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        _binding = inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,12 +71,18 @@ abstract class BaseFragment<VM : BaseViewModel, VB : ViewBinding>(@LayoutRes lay
                             onLoading()
                         }
                         is UiState.Success -> {
-                            if (it.data != null)
-                                onSuccess(it.data)
+                            it.data?.let { it1 ->
+                                onSuccess(it1)
+                            }
                         }
                     }
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

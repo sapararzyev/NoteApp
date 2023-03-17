@@ -9,7 +9,7 @@ import com.example.noteapp.databinding.NotesItemBinding
 import com.example.noteapp.domain.model.Note
 
 class NotesAdapter(
-    private val onLongItemClikListener: (Note) -> Unit,
+    private val onLongItemClikListener: (position: Int) -> Unit,
     private val onItemClikListener: (Note) -> Unit,
 ) : ListAdapter<Note, NotesAdapter.NotesViewHolder>(NotesCallback()) {
 
@@ -36,7 +36,7 @@ class NotesAdapter(
                 }
 
                 root.setOnLongClickListener {
-                    onLongItemClikListener(notesModel)
+                    onLongItemClikListener(adapterPosition)
                     true
                 }
             }

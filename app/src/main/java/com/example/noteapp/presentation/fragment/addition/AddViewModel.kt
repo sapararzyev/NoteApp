@@ -35,13 +35,17 @@ class AddViewModel @Inject constructor(
         }
     }
 
-    fun updateNote(note: Note) {
-        if (note.title.isNotEmpty() && note.title.isNotBlank()) {
-            updateNoteUseCase(
-                note
-            ).collectFlow(_createNoteState)
+    fun updateNote(id:Int, title:String, desc:String) {
+        if (id != null && title.isNotEmpty() && desc.isNotEmpty()) {
+            updateNoteUseCase(Note(
+                id = id,
+                title = title,
+                description = desc,
+                createAt = System.currentTimeMillis()
+            )
+            ).collectFlow(_updateNoteUseCase)
         } else {
-            _createNoteState.value = UiState.Error("title is emty")
+            _updateNoteUseCase.value = UiState.Error("title is emty")
         }
     }
 

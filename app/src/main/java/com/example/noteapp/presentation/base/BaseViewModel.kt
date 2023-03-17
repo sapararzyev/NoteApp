@@ -2,7 +2,6 @@ package com.example.noteapp.presentation.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.noteapp.domain.model.Note
 import com.example.noteapp.domain.utils.ResultStatus
 import com.example.noteapp.presentation.fragment.notes.UiState
 import kotlinx.coroutines.flow.Flow
