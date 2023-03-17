@@ -34,7 +34,6 @@ class AddFragment :
                         id = note?.id!!,
                         meSecond.text.toString(),
                         youSecond.text.toString()
-
                     )
                 } else vm.create(
                     meSecond.text.toString(),
@@ -46,7 +45,6 @@ class AddFragment :
 
 
     override fun setupRequests() {
-
         vm.updateNoteState.collectState(
             onLoading = {
                 binding.notesBar.isVisible = true
@@ -54,7 +52,6 @@ class AddFragment :
             onSuccess = {
                 ShowTost(getString(R.string.edit))
                 controller.navigateUp()
-                controller.navigate(R.id.notesFragment)
                 binding.notesBar.isVisible = false
             },
             onError = {
@@ -70,7 +67,6 @@ class AddFragment :
             onSuccess = {
                 ShowTost(getString(R.string.create))
                 controller.navigateUp()
-                controller.navigate(R.id.notesFragment)
                 binding.notesBar.isVisible = false
             },
             onError = {

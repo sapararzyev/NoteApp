@@ -22,6 +22,7 @@ class NotesFragment :
 
     override fun initialize() {
         binding.rvNotes.adapter = adapter
+        vm.notesUseCase()
     }
 
     override fun listeners() {
@@ -35,8 +36,6 @@ class NotesFragment :
         vm.deleteNotes(list[position])
         list.removeAt(position)
         adapter.submitList(list)
-        controller.navigateUp()
-        controller.navigate(R.id.notesFragment)
     }
 
     override fun setupRequests() {

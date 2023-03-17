@@ -13,6 +13,17 @@ class NotesAdapter(
     private val onItemClikListener: (Note) -> Unit,
 ) : ListAdapter<Note, NotesAdapter.NotesViewHolder>(NotesCallback()) {
 
+//    private var list = mutableListOf<Note>()
+//    private var deleteNote : Note? = null
+
+//    fun delete(){
+//        if (delete != null){
+//            list.removeAt(deleteNote)
+//            deleteNote = null
+//            notifyDataSetChanged()
+//        }
+//    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
         val binding = NotesItemBinding.inflate(LayoutInflater.from(parent.context),
             parent, false)
@@ -22,6 +33,9 @@ class NotesAdapter(
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
         val model = getItem(position)
         holder.bind(model)
+        holder.itemView.setOnClickListener {
+            onItemClikListener(model)
+        }
     }
 
     inner class NotesViewHolder(private val binding: NotesItemBinding) :
@@ -30,10 +44,6 @@ class NotesAdapter(
             with(binding) {
                 itemTvTiyle.text = notesModel.title
                 itemTvDes.text = notesModel.description
-
-                root.setOnClickListener {
-                   onItemClikListener(notesModel)
-                }
 
                 root.setOnLongClickListener {
                     onLongItemClikListener(adapterPosition)
